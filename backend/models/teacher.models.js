@@ -9,9 +9,12 @@ const teacherSchema = new mongoose.Schema({
     qualification: {
         type: [{type: String}],
     },
-    classes: {
-        type: [{type: String}],
-    },
+    assignedSections:[
+        {
+            className:String,
+            sectionName:String
+        }
+    ],
     experience: {
         type: String,
     },

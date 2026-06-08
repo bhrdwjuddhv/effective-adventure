@@ -10,7 +10,7 @@ const updateTeacherDetails = asyncHandler(async (req, res) => {
             {
                 subject,
                 qualification,
-                classes,
+                assignedSections,
                 experience,
                 holidays
             },{new: true}).select('-password -refreshToken');

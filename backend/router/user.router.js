@@ -1,11 +1,11 @@
 import {Router} from "express";
 import {
-    forgetPassword, getPendingUsers,
+    forgetPassword,
     loginUser,
     logoutUser,
     refreshAccessToken,
-    registerUser, rejectUser, updatePassword,
-    updateUserDetails, verifyUser
+    registerUser, updatePassword,
+    updateUserDetails
 } from "../controller/user.controller";
 import {verifyJWT, authorize} from "../middleware/middleware";
 
@@ -24,27 +24,6 @@ router.route('/update-password').post(updatePassword)
 
 
 
-//PENDING USER HANDLERS
-router.get(
-    "/pending-users",
-    verifyJWT,
-    authorize("admin"),
-    getPendingUsers
-);
-
-router.patch(
-    "/verify-user/:userId",
-    verifyJWT,
-    authorize("admin"),
-    verifyUser
-);
-
-router.delete(
-    "/reject-user/:userId",
-    verifyJWT,
-    authorize("admin"),
-    rejectUser
-);
 
 //HOLIDAY REQUEST HANDLERS
 
