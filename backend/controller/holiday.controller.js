@@ -2,8 +2,6 @@ import {ApiError} from "../utils/ApiError";
 import {ApiResponse} from "../utils/ApiResponse";
 import {School} from "../models";
 import {asyncHandler} from "../utils/asyncHandler";
-import {nanoid} from "nanoid";
-
 
 const getPublicHolidays = asyncHandler(async (req, res) => {
     const {year} = req.query;
@@ -72,7 +70,6 @@ const addSchoolVacation = asyncHandler(async (req, res) => {
         }
 
         school.vacations.push({
-            vacationId: nanoid(),
             title,
             startDate,
             endDate
@@ -93,8 +90,8 @@ const addSchoolVacation = asyncHandler(async (req, res) => {
 })
 
 const deleteSchoolVacation = asyncHandler(async (req, res) => {
-    const {schoolId} = req.params;
-    const {vacationId} = req.body;
+    const {schoolId, vacationId} = req.params;
+
     if(!schoolId) {
         throw new ApiError(400, "School ID is required");
     }

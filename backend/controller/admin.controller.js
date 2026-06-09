@@ -7,7 +7,8 @@ import {asyncHandler} from "../utils/asyncHandler";
 const getPendingUsers = asyncHandler(async (req, res) => {
     try{
         const users = await User.find({
-            verified: false
+            verified: false,
+            schoolId: req.user.schoolId
         }).select("-password -refreshToken");
 
         return res.status(200).json(
@@ -26,8 +27,11 @@ const verifyUser = asyncHandler(async (req, res) => {
     const { userId } = req.params;
 
     try {
-        const user = await User.findByIdAndUpdate(
-            userId,
+        const user = await User.findOneAndUpdate(
+            {
+                _id: userId,
+            schoolId: req.user.schoolId
+            },
             {
                 verified: true
             },

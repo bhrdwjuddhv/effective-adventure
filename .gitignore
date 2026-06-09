@@ -29,10 +29,9 @@ coverage/
 dist/
 build/
 
+
 # Temporary files
 tmp/
-temp/
-
 # OS files
 .DS_Store
 Thumbs.db
@@ -76,4 +75,4 @@ uploads/
 *.swp
 *.swo
 backend/prd.md
-backend/prdabsent.md
+backend/*.md

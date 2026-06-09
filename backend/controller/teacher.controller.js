@@ -4,15 +4,17 @@ import {ApiError} from "../utils/ApiError";
 import {ApiResponse} from "../utils/ApiResponse";
 
 const updateTeacherDetails = asyncHandler(async (req, res) => {
-    const {email} = req.body;
+    const updates = req.body;
     try{
-        const teacher = await Teacher.findOneAndUpdate({email:email},
+        const teacher = await Teacher.findOneAndUpdate(
             {
-                subject,
-                qualification,
-                assignedSections,
-                experience,
-                holidays
+                _id: req.user._id,
+                schoolId: req.user.schoolId
+            },
+            {
+                $set: {
+                    updates
+                }
             },{new: true}).select('-password -refreshToken');
         if (!teacher) {
             throw new ApiError(404, 'Teacher not found');

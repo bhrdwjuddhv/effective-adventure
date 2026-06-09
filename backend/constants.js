@@ -1,5 +1,1 @@
-const dbName = 'erp'
-
-export default {
-    dbName,
-}
+export const dbName = 'erpportal'

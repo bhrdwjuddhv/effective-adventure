@@ -4,6 +4,7 @@ import {ApiResponse} from "../utils/ApiResponse";
 import {asyncHandler} from "../utils/asyncHandler";
 import jwt from "jsonwebtoken";
 import forgotPasswordMail from "../services/email/forgotPasswordMail";
+import {uploadOnCloudinary} from "../utils/cloudinary";
 
 const generateAccessAndRefreshTokens = async (userId) => {
     try{
@@ -44,12 +45,34 @@ const registerUser = asyncHandler(async (req, res) => {
     if (existingUser) {
         throw new ApiError(400, "User already exists");
     }
+
+    const userImageLocalPath = req.files?.userImage[0]?.path;
+    let userImage;
+
+    if (userImageLocalPath) {
+        const uploadedImage =
+            await uploadOnCloudinary(
+                userImageLocalPath
+            );
+
+        if(!uploadedImage){
+            console.log("Image upload failed");
+        }
+
+        userImage =
+            uploadedImage?.url;
+    }
+
+
     const roleModels = { Teacher, Student };
     const Model = roleModels[role];
     if (!Model) {
         throw new ApiError(400, "Invalid role");
     }
-    const user = await Model.create(data)
+    const user = await Model.create({
+        ...data,
+        userImage
+    })
     const createdUser = await User.findById(user._id).select(
         "-password -refreshToken"
     )
@@ -121,8 +144,8 @@ const logoutUser = asyncHandler(async (req, res) => {
         secure: true
     }
 
-    return res.status(200).clearCookie("accessToken", accessToken. options)
-        .clearCookie("refreshToken", refreshToken, options)
+    return res.status(200).clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
         .json(new ApiResponse(200, {}, "User logged out successfully"))
 
 
@@ -171,11 +194,11 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             secure: true
         }
 
-        const {accessToken, newRefreshToken} = await generateAccessAndRefreshTokens(user._id)
+        const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(user._id)
 
         return res.status(200).cookie("accessToken", accessToken, options)
-            .cookie("refreshToken", newRefreshToken, options)
-            .json(new ApiResponse(200, {accessToken, refreshToken: newRefreshToken}, "Access Token refreshed successfully"))
+            .cookie("refreshToken", refreshToken, options)
+            .json(new ApiResponse(200, {accessToken, refreshToken}, "Access Token refreshed successfully"))
 
     }catch(error){
         new ApiError(401, error?.message || "Invalid Refresh Token");
@@ -185,6 +208,33 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 })
 
+const updateUserImage = asyncHandler(async (req, res) => {
+    const userImageLocalPath = req.file?.path
+    if(!userImageLocalPath) {
+        new ApiError(401, "Invalid avatar local path")
+    }
+    const userImage = await uploadOnCloudinary(userImageLocalPath)
+    if(!userImage.url){
+        throw new ApiError(401, "Error uploading avatar")
+    }
+
+    const user =  await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set:{
+                userImage: userImage.url
+            }
+        } , {new: true}
+    ).select("-password")
+
+    return res.status(200).json(new ApiResponse(200,user,"User Image updated successfully"))
+})
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+    return res.status(200).json(200 , req.user, "Current User Fetched Successfully")
+})
+
+// PASSWORD HANDLING
 const forgetPassword = asyncHandler(async (req, res) => {
     const email = req.body.email
     if (!email) {

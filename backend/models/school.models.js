@@ -48,10 +48,6 @@ const SchoolSchema = new mongoose.Schema({
 
         }],
     vacations:[ {
-            vacationId: {
-                type: String,
-                unique: true,
-            },
             title: String,
             startDate: String,
             endDate: String

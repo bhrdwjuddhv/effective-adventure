@@ -27,7 +27,7 @@ import adminRouter from "./router/admin.router.js";
 import schoolRouter from "./router/school.router.js";
 import holidayRouter from "./router/holiday.router.js";
 import attendanceRouter from "./router/attendance.router";
-
+import announcementRouter from "./router/announcement.router";
 
 //routes declaration
 app.use("/api/v1/users", userRouter);
@@ -36,7 +36,7 @@ app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/school", schoolRouter);
 app.use("/api/v1/holiday", holidayRouter);
 app.use("/api/v1/attendance", attendanceRouter);
-
+app.use("/api/v1/announcements", announcementRouter);
 
 
 export { app };

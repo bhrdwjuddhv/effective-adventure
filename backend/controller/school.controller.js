@@ -32,10 +32,11 @@ const generateJoinCode = async (schoolName) => {
 }
 
 const registerSchool = asyncHandler(async (req, res) => {
-    const {...data,
+    const {
         adminName,
         adminEmail,
-        adminPassword} = req.body;
+        adminPassword,
+        ...data} = req.body;
     if (Object.keys(data).length === 0) {
         throw new ApiError(
             400,
@@ -92,13 +93,6 @@ const registerSchool = asyncHandler(async (req, res) => {
             )
         );
 
-
-
-
-
-        return res.status(201).json(
-            new ApiResponse(201, school, "School created successfully."),
-        )
 
 
     }catch(err){

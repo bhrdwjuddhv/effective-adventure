@@ -7,12 +7,20 @@ import {
     registerUser, updatePassword,
     updateUserDetails
 } from "../controller/user.controller";
-import {verifyJWT, authorize} from "../middleware/middleware";
+import {verifyJWT} from "../middleware/middleware";
+import {upload} from "../middleware/multer.middleware";
 
 
 const router = Router();
 
-router.route('/register').post(registerUser)
+router.route('/register').post(
+    upload.fields([
+    {
+        name: "userImage",
+        maxCount: 1,
+    }
+]),
+    registerUser)
 router.route('/login').post(loginUser)
 
 // SECURE ROUTES
