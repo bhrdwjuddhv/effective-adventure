@@ -40,7 +40,7 @@ const SchoolSchema = new mongoose.Schema({
                     sectionName: String,
 
                     classTeacher: {
-                        type: ObjectId,
+                        type: mongoose.Schema.Types.ObjectId,
                         ref: "User"
                     }
                 }

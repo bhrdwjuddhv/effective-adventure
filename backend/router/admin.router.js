@@ -1,6 +1,6 @@
-import {getPendingUsers, verifyUser, rejectUser} from "../controller/admin.controller";
+import {getPendingUsers, verifyUser, rejectUser} from "../controller/admin.controller.js";
 import {Router} from "express";
-import {verifyJWT, authorize} from "../middleware/middleware";
+import {verifyJWT, authorize} from "../middleware/middleware.js";
 
 const router = Router();
 

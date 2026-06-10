@@ -26,8 +26,8 @@ import teacherRouter from "./router/teacher.router.js";
 import adminRouter from "./router/admin.router.js";
 import schoolRouter from "./router/school.router.js";
 import holidayRouter from "./router/holiday.router.js";
-import attendanceRouter from "./router/attendance.router";
-import announcementRouter from "./router/announcement.router";
+import attendanceRouter from "./router/attendance.router.js";
+import announcementRouter from "./router/announcement.router.js";
 
 //routes declaration
 app.use("/api/v1/users", userRouter);

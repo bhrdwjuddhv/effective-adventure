@@ -1,7 +1,7 @@
 import {Router} from "express";
-import {authorize, verifyJWT} from "../middleware/middleware";
-import {createAnnouncement, deleteAnnouncement, getAllAnnouncements, updateAnnouncement, getAnnouncement} from "../controller/announcement.controller";
-import {upload} from "../middleware/multer.middleware";
+import {authorize, verifyJWT} from "../middleware/middleware.js";
+import {createAnnouncement, deleteAnnouncement, getAllAnnouncements, updateAnnouncement, getAnnouncement} from "../controller/announcement.controller.js";
+import {upload} from "../middleware/multer.middleware.js";
 
 const router = Router();
 

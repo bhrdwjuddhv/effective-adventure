@@ -1,7 +1,7 @@
-import {User} from "../models";
-import {ApiResponse} from "../utils/ApiResponse";
-import {ApiError} from "../utils/ApiError";
-import {asyncHandler} from "../utils/asyncHandler";
+import {User} from "../models/index.js";
+import {ApiResponse} from "../utils/ApiResponse.js";
+import {ApiError} from "../utils/ApiError.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
 
 //PENDING USER HANDLERS
 const getPendingUsers = asyncHandler(async (req, res) => {

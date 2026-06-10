@@ -1,10 +1,10 @@
-import {User, Teacher, Student} from "../models/";
-import {ApiError} from "../utils/ApiError";
-import {ApiResponse} from "../utils/ApiResponse";
-import {asyncHandler} from "../utils/asyncHandler";
+import {User, Teacher, Student} from "../models/index.js";
+import {ApiError} from "../utils/ApiError.js";
+import {ApiResponse} from "../utils/ApiResponse.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
-import forgotPasswordMail from "../services/email/forgotPasswordMail";
-import {uploadOnCloudinary} from "../utils/cloudinary";
+import forgotPasswordMail from "../services/email/forgotPasswordMail.js";
+import {uploadOnCloudinary} from "../utils/cloudinary.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {
     try{

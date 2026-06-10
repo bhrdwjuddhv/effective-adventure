@@ -6,9 +6,9 @@ import {
     refreshAccessToken,
     registerUser, updatePassword,
     updateUserDetails
-} from "../controller/user.controller";
-import {verifyJWT} from "../middleware/middleware";
-import {upload} from "../middleware/multer.middleware";
+} from "../controller/user.controller.js";
+import {verifyJWT} from "../middleware/middleware.js";
+import {upload} from "../middleware/multer.middleware.js";
 
 
 const router = Router();

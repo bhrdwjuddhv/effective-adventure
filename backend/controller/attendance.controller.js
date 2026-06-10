@@ -1,7 +1,7 @@
 import {User, School} from "../models/index.js";
-import {ApiResponse} from "../utils/ApiResponse";
-import {ApiError} from "../utils/ApiError";
-import {asyncHandler} from "../utils/asyncHandler";
+import {ApiResponse} from "../utils/ApiResponse.js";
+import {ApiError} from "../utils/ApiError.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
 
 const markAbsent = asyncHandler(async (req, res) => {
         const {userId, date} = req.body;

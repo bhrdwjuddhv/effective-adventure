@@ -1,6 +1,6 @@
 import {Router} from "express";
-import {verifyJWT} from "../middleware/middleware";
-import {updateTeacherDetails, getAllTeachers, getTeacher} from "../controller/teacher.controller";
+import {verifyJWT} from "../middleware/middleware.js";
+import {updateTeacherDetails, getAllTeachers, getTeacher} from "../controller/teacher.controller.js";
 
 const router = Router();
 

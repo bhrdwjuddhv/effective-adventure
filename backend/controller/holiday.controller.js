@@ -1,11 +1,11 @@
-import {ApiError} from "../utils/ApiError";
-import {ApiResponse} from "../utils/ApiResponse";
-import {School} from "../models";
-import {asyncHandler} from "../utils/asyncHandler";
+import {ApiError} from "../utils/ApiError.js";
+import {ApiResponse} from "../utils/ApiResponse.js";
+import {School} from "../models/index.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
 
 const getPublicHolidays = asyncHandler(async (req, res) => {
     const {year} = req.query;
-    const nationalHolidays = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/IN`)
+    // const nationalHolidays = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/IN`)
     //https://api-ninjas.com/api/holidays#holidays-endpoint
 
 })

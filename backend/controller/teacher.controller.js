@@ -1,7 +1,7 @@
-import {Teacher} from "../models";
-import {asyncHandler} from "../utils/asyncHandler";
-import {ApiError} from "../utils/ApiError";
-import {ApiResponse} from "../utils/ApiResponse";
+import {Teacher} from "../models/index.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
+import {ApiError} from "../utils/ApiError.js";
+import {ApiResponse} from "../utils/ApiResponse.js";
 
 const updateTeacherDetails = asyncHandler(async (req, res) => {
     const updates = req.body;

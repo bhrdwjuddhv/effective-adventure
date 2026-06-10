@@ -1,5 +1,5 @@
-import {getSchoolVacation, getPublicHolidays, addSchoolVacation, deleteSchoolVacation, updateSchoolVacation} from "../controller/holiday.controller";
-import {authorize, verifyJWT} from "../middleware/middleware";
+import {getSchoolVacation, getPublicHolidays, addSchoolVacation, deleteSchoolVacation, updateSchoolVacation} from "../controller/holiday.controller.js";
+import {authorize, verifyJWT} from "../middleware/middleware.js";
 import {Router} from "express";
 
 const router = Router();
