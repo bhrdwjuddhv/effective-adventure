@@ -9,10 +9,11 @@ dotenv.config();
 
 const server = http.createServer(app);
 
-initializeSocket(server);
 
 connectDb()
     .then(()=>{
+        initializeSocket(server);
+
         server.listen(process.env.PORT, ()=>{
             console.log("Listening on port " + process.env.PORT);
         })

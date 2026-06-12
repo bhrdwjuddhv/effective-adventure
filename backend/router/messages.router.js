@@ -1,10 +1,17 @@
 import {authorize, verifyJWT} from "../middleware/middleware.js";
 import {Router} from "express";
-import {loadMessages} from "../controller/message.controller.js";
+import {deleteMessage, loadMessages} from "../controller/message.controller.js";
 
 const router = Router();
 
-router.route("/messages").get(
+router.route("/get-all-messages").get(
     verifyJWT,
     loadMessages,
 )
+
+router.route("/message/:messageId").delete(
+    verifyJWT,
+    deleteMessage
+);
+
+export default router;

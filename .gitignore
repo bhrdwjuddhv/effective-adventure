@@ -76,3 +76,4 @@ uploads/
 *.swo
 backend/prd.md
 backend/*.md
+backend/docs

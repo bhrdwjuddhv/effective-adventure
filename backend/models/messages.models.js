@@ -8,7 +8,15 @@ const messageSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "User"
             },
-            message: String
+            senderName: {
+                type: String,
+                required: true
+            },
+            message: String,
+            edited: {
+                type: Boolean,
+                default: false
+            }
         }, {timestamps: true});
 
 export const Message = mongoose.model("Message", messageSchema);

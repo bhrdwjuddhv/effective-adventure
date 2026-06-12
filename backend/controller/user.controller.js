@@ -163,8 +163,6 @@ const updateUserDetails = asyncHandler(async (req, res) => {
             $set: {
                 fullName: fullName,
                 email: email,
-                role: role,
-                schoolId: schoolId,
             }
         }, { new: true }
     ).select("-password -refreshToken");
@@ -201,7 +199,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             .json(new ApiResponse(200, {accessToken, refreshToken}, "Access Token refreshed successfully"))
 
     }catch(error){
-        new ApiError(401, error?.message || "Invalid Refresh Token");
+        throw new ApiError(401, error?.message || "Invalid Refresh Token");
     }
 
 
@@ -211,7 +209,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const updateUserImage = asyncHandler(async (req, res) => {
     const userImageLocalPath = req.file?.path
     if(!userImageLocalPath) {
-        new ApiError(401, "Invalid avatar local path")
+        throw new ApiError(401, "Invalid avatar local path")
     }
     const userImage = await uploadOnCloudinary(userImageLocalPath)
     if(!userImage.url){
@@ -231,7 +229,7 @@ const updateUserImage = asyncHandler(async (req, res) => {
 })
 
 const getCurrentUser = asyncHandler(async (req, res) => {
-    return res.status(200).json(200 , req.user, "Current User Fetched Successfully")
+    return res.status(200).json(new ApiResponse(200, req.user, "Current User Fetched Successfully"))
 })
 
 // PASSWORD HANDLING
@@ -307,4 +305,4 @@ const updatePassword = asyncHandler(async (req, res) => {
 
 
 export {registerUser, loginUser , logoutUser, updateUserDetails ,
-    refreshAccessToken ,forgetPassword, updatePassword};
+    refreshAccessToken ,forgetPassword, updatePassword, updateUserImage, getCurrentUser};

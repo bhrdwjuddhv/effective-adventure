@@ -57,7 +57,7 @@ const SchoolSchema = new mongoose.Schema({
         type:String,
     },
     adminId:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
         required:true,
     }
 }, {timestamps: true})

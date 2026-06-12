@@ -111,7 +111,7 @@ const deleteSchoolVacation = asyncHandler(async (req, res) => {
         }
 
         school.vacations = school.vacations.filter(
-            vacation => vacation.vacationId !== vacationId
+            vacation => vacation._id.toString() !== vacationId
         )
 
         await school.save();
@@ -130,9 +130,8 @@ const deleteSchoolVacation = asyncHandler(async (req, res) => {
 })
 
 const updateSchoolVacation = asyncHandler(async (req, res) => {
-    const {schoolId} = req.params;
+    const {schoolId, vacationId} = req.params;
     const {
-        vacationId,
         title,
         startDate,
         endDate
@@ -161,7 +160,7 @@ try
         const vacation =
             school.vacations.find(
                 vacation =>
-                    vacation.vacationId ===
+                    vacation._id.toString() ===
                     vacationId
             );
 

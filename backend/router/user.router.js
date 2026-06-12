@@ -5,7 +5,7 @@ import {
     logoutUser,
     refreshAccessToken,
     registerUser, updatePassword,
-    updateUserDetails
+    updateUserDetails, updateUserImage, getCurrentUser
 } from "../controller/user.controller.js";
 import {verifyJWT} from "../middleware/middleware.js";
 import {upload} from "../middleware/multer.middleware.js";
@@ -29,11 +29,15 @@ router.route('/update-details').post(verifyJWT, updateUserDetails)
 router.route('/refresh-token').post(refreshAccessToken)
 router.route('/forget-password').post(forgetPassword)
 router.route('/update-password').post(updatePassword)
+router.route('/update-user-image').post(
+    verifyJWT,
+    upload.single("userImage"),
+    updateUserImage)
 
-
-
-
-//HOLIDAY REQUEST HANDLERS
+router.route('/get-current-user').get(
+    verifyJWT,
+    getCurrentUser
+)
 
 
 

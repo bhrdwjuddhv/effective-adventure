@@ -82,12 +82,14 @@ const registerSchool = asyncHandler(async (req, res) => {
 
         school.adminId = admin._id;
         await school.save()
+
+        const adminSafe = await User.findById(admin._id).select("-password -refreshToken");
         return res.status(201).json(
             new ApiResponse(
                 201,
                 {
                     school,
-                    admin
+                    admin: adminSafe
                 },
                 "School created successfully"
             )

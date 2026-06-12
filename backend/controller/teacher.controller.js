@@ -12,9 +12,7 @@ const updateTeacherDetails = asyncHandler(async (req, res) => {
                 schoolId: req.user.schoolId
             },
             {
-                $set: {
-                    updates
-                }
+                $set: updates
             },{new: true}).select('-password -refreshToken');
         if (!teacher) {
             throw new ApiError(404, 'Teacher not found');

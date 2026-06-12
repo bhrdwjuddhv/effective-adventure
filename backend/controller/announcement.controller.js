@@ -11,38 +11,36 @@ const createAnnouncement = asyncHandler(async (req, res) => {
         audience,
         targetClass,
         targetSection,
-        notice,
-        createdBy
     } = req.body
 
-    if(!user){
+    if(!req.user){
         throw new ApiError(403, "User Not Found!");
     }
     if ([title,content,audience].some((field)=>field?.trim() === "")){
         throw new ApiError(403, "Data Required!");
     }
     try{
-        const noticeLocalPath = req.files?.notice[0]?.path;
-        let notice;
+        const noticeLocalPath = req.files?.notice?.[0]?.path;
+        let noticeUrl;
         if (noticeLocalPath){
          const  uploadedNotice = await uploadOnCloudinary(noticeLocalPath);
          if(!uploadedNotice){
              throw new ApiError(403, "Error uploading notice!");
          }
 
-            notice = uploadedNotice?.url;
+            noticeUrl = uploadedNotice?.url;
         }
 
 
 
         const announcement = await Announcement.create({
             title,
-            schoolId: user?.schoolId,
+            schoolId: req.user?.schoolId,
             audience,
             content,
             targetClass,
             targetSection,
-            notice,
+            notice: noticeUrl,
             createdBy: req.user._id,
 
         })

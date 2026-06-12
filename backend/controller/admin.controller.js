@@ -7,8 +7,8 @@ import {asyncHandler} from "../utils/asyncHandler.js";
 const getPendingUsers = asyncHandler(async (req, res) => {
     try{
         const users = await User.find({
-            verified: false,
-            schoolId: req.user.schoolId
+            schoolId: req.user.schoolId,
+            verified: false
         }).select("-password -refreshToken");
 
         return res.status(200).json(
@@ -29,8 +29,9 @@ const verifyUser = asyncHandler(async (req, res) => {
     try {
         const user = await User.findOneAndUpdate(
             {
+                schoolId: req.user.schoolId,
                 _id: userId,
-            schoolId: req.user.schoolId
+
             },
             {
                 verified: true
@@ -60,9 +61,10 @@ const rejectUser = asyncHandler(async (req, res) => {
     const { userId } = req.params;
 
     try {
-        const user = await User.findByIdAndDelete(
-            userId
-        );
+        const user = await User.findOneAndDelete({
+            _id: userId,
+            schoolId: req.user.schoolId
+        });
 
         if (!user) {
             throw new ApiError(

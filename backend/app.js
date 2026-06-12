@@ -28,6 +28,8 @@ import schoolRouter from "./router/school.router.js";
 import holidayRouter from "./router/holiday.router.js";
 import attendanceRouter from "./router/attendance.router.js";
 import announcementRouter from "./router/announcement.router.js";
+import messagesRouter from "./router/messages.router.js";
+import studentRouter from "./router/student.router.js";
 
 //routes declaration
 app.use("/api/v1/users", userRouter);
@@ -37,6 +39,8 @@ app.use("/api/v1/school", schoolRouter);
 app.use("/api/v1/holiday", holidayRouter);
 app.use("/api/v1/attendance", attendanceRouter);
 app.use("/api/v1/announcements", announcementRouter);
+app.use("/api/v1/messages", messagesRouter);
+app.use("/api/v1/students", studentRouter);
 
 
 export { app };
