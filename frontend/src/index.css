@@ -1,1 +1,114 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #ea681c;
+  --color-brand-secondary: #202b5d;
+  --color-brand-dark: #06163a;
+  --color-neutral-surface: #f6f6f6;
+  --color-neutral-bg: #ffffff;
+
+  --font-family-sans: "Inter", system-ui, sans-serif;
+  --font-family-display: "Space Grotesk", system-ui, sans-serif;
+  --font-family-chalk: "Fredericka the Great", cursive;
+
+  /* Chalk / blackboard palette */
+  --color-chalk: #F2EDD8;
+  --color-board: #1E3A2B;
+  --color-frame: #5C3318;
+  --color-wall: #EAD9B5;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #202b5d;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .shadow-brutal {
+    box-shadow: 4px 4px 0px 0px #06163a;
+  }
+
+  .shadow-brutal-lg {
+    box-shadow: 8px 8px 0px 0px #06163a;
+  }
+
+  .shadow-brutal-orange {
+    box-shadow: 4px 4px 0px 0px #ea681c;
+  }
+
+  .border-brand {
+    border: 2px solid #06163a;
+  }
+
+  .font-display {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+  }
+  .font-chalk {
+    font-family: "Fredericka the Great", cursive;
+  }
+}
+
+/* ── Chalk input placeholder colour ── */
+.chalk-input::placeholder {
+  color: rgba(242, 237, 216, 0.22);
+  font-family: "Fredericka the Great", cursive;
+}
+.chalk-input:focus {
+  border-bottom-color: rgba(242, 237, 216, 0.8) !important;
+}
+.chalk-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(0.2);
+  cursor: pointer;
+}
+/* Thin chalk scroll */
+.chalk-scroll::-webkit-scrollbar { width: 3px; }
+.chalk-scroll::-webkit-scrollbar-track { background: rgba(242,237,216,0.08); }
+.chalk-scroll::-webkit-scrollbar-thumb { background: rgba(242,237,216,0.25); border-radius: 2px; }
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 1rem)); }
+}
+
+@keyframes scroll-right {
+  from { transform: translateX(calc(-50% - 1rem)); }
+  to   { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 30s linear infinite;
+}
+
+.animate-scroll-left {
+  animation: scroll-left 40s linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 45s linear infinite;
+}
+
+.testimonial-track:hover .animate-scroll-left,
+.testimonial-track:hover .animate-scroll-right {
+  animation-play-state: paused;
+}

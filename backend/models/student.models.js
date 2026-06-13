@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 import {User} from "./user.models.js";
 
 const studentSchema = new mongoose.Schema({
-    class:{
-        type: String,
-        required: true,
-    },
     result: [
         {
             class: String,
